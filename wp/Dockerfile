@@ -5,13 +5,20 @@ RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 RUN yum-config-manager --enable remi-php72
 
 RUN yum -y install httpd libmcrypt-dev php libapache2-mod-php \
-    php-mysql mod_ssl mod_php mod_rewrite openssl wget
+    php-mysql mod_ssl mod_php mod_rewrite openssl wget unzip
 
 RUN cd /tmp && \
     wget -c https://wordpress.org/wordpress-4.9.8.tar.gz && \
     tar -xzvf wordpress-4.9.8.tar.gz && \
+    rm wordpress-4.9.8.tar.gz && \
     rm -Rf /var/www/html/* && \
-    mv wordpress/* /var/www/html/
+    mv wordpress/* /var/www/html/ 
+
+RUN cd /tmp && \
+    wget https://downloads.wordpress.org/plugin/wordpress-social-login.zip && \
+    unzip wordpress-social-login.zip && \
+    rm wordpress-social-login.zip && \
+    mv wordpress-social-login /var/www/html/wp-content/plugins/
 
 COPY image/wp-config.php /var/www/html/    
 
@@ -56,4 +63,4 @@ EXPOSE 8443
 
 ENTRYPOINT [ "/usr/local/bin/startup.sh" ]
 
-USER 5001
+USER 1001
