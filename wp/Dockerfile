@@ -27,17 +27,19 @@ RUN chmod g=u /etc/passwd && \
 
 COPY image/servername.conf /etc/httpd/conf.d/
 
-RUN chown -R 1000:0 /var/log && \
-    chown -R 1000:0 /var/www && \
-    chown -R 1000:0 /etc/httpd && \
-    chown -R 1000:0 /etc/pki && \
+RUN chown -R 1001:0 /var/log && \
+    chown -R 1001:0 /var/www && \
+    chown -R 1001:0 /etc/httpd && \
+    chown -R 1001:0 /etc/pki && \
     mkdir -p /var/run/httpd && \
-    chown -R 1000:0 /var/run/httpd && \
+    chown -R 1001:0 /var/run/httpd && \
+    chown -R 1001:0 /var/lib/php && \
     mkdir -p /var/lock/httpd && \
-    chown -R 1000:0 /var/lock/httpd && \
-    chown -R 1000:0 /tmp
+    chown -R 1001:0 /var/lock/httpd && \
+    chown -R 1001:0 /tmp
 
 RUN chmod -R 775 /var/log && \
+    chmod -R 775 /var/lib/php && \
     chmod -R 775 /var/www && \
     chmod -R 775 /etc/httpd && \
     chmod -R 775 /etc/pki && \
