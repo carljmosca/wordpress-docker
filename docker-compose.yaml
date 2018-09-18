@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+
+  wp:
+    image: carljmosca/wp:4.9.8
+    build:
+      context: wp/
+    links:
+      - wp-db:db
+    ports:
+      - 80:8080
+      - 443:8443
+    environment:
+      - HOSTNAME=test.colonybythesea.net
+      - DB_HOST=db
+      - DB_NAME=wordpress
+      - DB_USER=wordpress
+      - DB_PASSWORD=W0rdPre$$
+      - WP_DEBUG=false
+
+  wp-db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=W0rdPre$$
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=W0rdPre$$

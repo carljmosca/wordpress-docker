@@ -13,6 +13,8 @@ RUN cd /tmp && \
     rm -Rf /var/www/html/* && \
     mv wordpress/* /var/www/html/
 
+COPY image/wp-config.php /var/www/html/    
+
 RUN chmod g=u /etc/passwd && \
     usermod -l apache1 apache
 
@@ -53,3 +55,5 @@ EXPOSE 8080
 EXPOSE 8443
 
 ENTRYPOINT [ "/usr/local/bin/startup.sh" ]
+
+USER 5001
