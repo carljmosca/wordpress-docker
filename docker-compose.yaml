@@ -19,7 +19,7 @@ services:
       - WP_DEBUG=false
 
   wp-db:
-    image: mysql:5.7
+    image: registry.access.redhat.com/rhscl/mysql-57-rhel7
     environment:
       - MYSQL_ROOT_PASSWORD=W0rdPre$$
       - MYSQL_DATABASE=wordpress
